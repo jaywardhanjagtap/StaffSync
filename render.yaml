@@ -1,0 +1,17 @@
+services:
+  # Unified Full-Stack Service (Express serving React frontend + API)
+  - type: web
+    name: staffsync-app
+    env: node
+    plan: free
+    buildCommand: npm --prefix server install && npm --prefix client install && npm --prefix client run build
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
